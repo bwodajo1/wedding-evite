@@ -64,8 +64,8 @@ form.querySelectorAll('input[name="attendance"]').forEach(input => {
 });
 
 form.addEventListener('submit', (e) => {
-  const isHosted = /netlify\.app$/.test(location.hostname) || document.body.dataset.forceNetlify === 'true';
-  if (isHosted) return;
+  const isLocal = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '';
+  if (!isLocal) return;
 
   e.preventDefault();
   const data = Object.fromEntries(new FormData(form).entries());
